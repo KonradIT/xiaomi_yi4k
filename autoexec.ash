@@ -13,7 +13,7 @@
 #	- sets autoknee
 #	- sets Auto Exposure
 #	- sets Gamma
-#	- sets 1080p 16:9 bitrate to 75mb/s
+#	- sets Bitrates of 1080p, 1080p Superview, 2.7K, 2.7K Superview to 100MB/s
 
 #Sets microphone input: line | mic
 t ants audio input mode mic
@@ -39,12 +39,24 @@ t imgproc -ae on
 #Gamma value:
 t imgproc -adj gamma 128
 
-#Bitrate mods:
-writel 0xA06CA5B4 0x42C80000 
-writel 0xA06CA5B8 0x3F800000 #lower bound: 1
-writel 0xA06CA5BC 0x3F800000 #upper bound: 1
+#Bitrate mods on 1.10.7 to enable high bitrates
+#1080p all FR
+writel 0xA06D4C7C 0x42C80000 #60P 16:9
+writel 0xA06D4D3C 0x42C80000 #30P 16:9
+writel 0xA06D530C 0x42C80000 #48P 16:9
+writel 0xA06D533C 0x42C80000 #24P 16:9
+writel 0xA06D55AC 0x42C80000 #120P 16:9
+#1080p Superview
+writel 0xA06D58DC 0x42C80000 #90P 16:9 super
+writel 0xA06D4CAC 0x42C80000 #60P 16:9 super
+writel 0xA06D4D6C 0x42C80000 #30P 16:9 super
 
-writel 0xA06CAA34 0x42C80000
-writel 0xA06CAA38 0x3F800000 #lower bound: 1
-writel 0xA06CAA3C 0x3F800000 #upper bound: 1
+#2.7K all framerates
+writel 0xA06D49AC 0x42C80000 
+writel 0xA06D49DC 0x42C80000 
+writel 0xA06D4A0C 0x42C80000 
+writel 0xA06D4A3C 0x42C80000 
+
+#2.7k Superview
+writel 0xA06D4A6C 0x42C80000 
 
